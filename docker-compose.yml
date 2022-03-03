@@ -1,0 +1,21 @@
+version: '3.9'
+networks:
+    dockernetwork:
+      external: true
+services:  
+  app:
+    image: menu:v1
+    container_name: menu
+    build: .
+    networks:
+      - dockernetwork
+    ports:
+      - 5001
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.menu.rule=Host(`resto.novation.menu`)"
+      - "traefik.http.routers.menu.entrypoints=https"
+      - "traefik.http.routers.menu.tls=true"
+      - "traefik.http.routers.menu.tls.certresolver=letsencrypt"
+      - "traefik.http.services.menu.loadbalancer.server.port=5001"
+      - "org.label-schema.group=monitoring"
