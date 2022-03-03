@@ -5,7 +5,7 @@ RUN apt-get update \
     && pip install psycopg2
 
 WORKDIR /app
-RUN git clone https://gitlab.com/ModernMenu/menu.git .
+RUN git clone https://github.com/NovationMenu/menu.git .
 # RUN sed -i "s/localhost/${DOCKER_HOST}/g" /app/app.py
 RUN sed -i "s/localhost/pg_container/g" /app/app.py
 
